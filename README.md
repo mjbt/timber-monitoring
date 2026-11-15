@@ -1,5 +1,7 @@
 # Timber monitoring
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24247030.svg)](https://doi.org/10.5281/zenodo.24247030)
+
 Monitoring, projection and humidity-led conservation heating for historic timber, developed at the Rotunda, Woolwich.
 
 The Rotunda was designed by John Nash as a tent for the Prince Regent's fête of 1814 and moved to Woolwich Common in 1818–1820, where it was enclosed in a brick drum. It is listed Grade II*. Its conoid roof rests on twenty-four laminated timber trusses, and the purpose of the monitoring is to keep those trusses dry enough to last. Rotunda Trust is a charitable Building Preservation Trust formed to conserve it.
@@ -49,4 +51,4 @@ Attribute as: Rotunda Trust, Woolwich Rotunda monitoring record, with monitoring
 
 ## Credits
 
-Written by Michael Trousdell for Rotunda Trust. Monitoring infrastructure by ThaniumNine. Access to the building by kind support of the Defence Infrastructure Organisation and VINCI Facilities. Cite with `CITATION.cff`.
+Written by Michael Trousdell for Rotunda Trust. Monitoring infrastructure by ThaniumNine. Access to the building by kind support of the Defence Infrastructure Organisation and VINCI Facilities. Cite as https://doi.org/10.5281/zenodo.24247030, which always resolves to the latest version; version 1.0.0 is https://doi.org/10.5281/zenodo.24247031. Details in `CITATION.cff`.
