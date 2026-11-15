@@ -1,0 +1,17 @@
+{
+  "title": "Timber monitoring: moist-air relations, response model and humidity-led conservation heating for historic timber",
+  "upload_type": "software",
+  "description": "Code, data and method from the environmental monitoring of the Rotunda, Woolwich (John Nash, 1814; Grade II*). Magnus-Sonntag psychrometrics, condensation margin and surface humidity, a first-order response model fitted on the trailing week, and a humidity-led conservation heating and ventilation strategy. Code MIT; text, figures and data CC BY 4.0. Rotunda Trust Limited, company 17115816, registered charity 1220458.",
+  "creators": [
+    {"name": "Trousdell, Michael", "affiliation": "Rotunda Trust Limited"}
+  ],
+  "contributors": [
+    {"name": "Rotunda Trust Limited", "type": "RightsHolder"},
+    {"name": "ThaniumNine", "type": "Other"}
+  ],
+  "license": "MIT",
+  "keywords": ["conservation heating", "relative humidity", "historic timber", "condensation", "mould", "building monitoring", "Woolwich Rotunda"],
+  "related_identifiers": [
+    {"identifier": "https://www.rotundatrust.org.uk/rotunda-monitoring.html", "relation": "isSupplementTo", "scheme": "url"}
+  ]
+}

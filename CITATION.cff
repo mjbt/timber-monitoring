@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Timber monitoring: moist-air relations, response model and humidity-led conservation heating for historic timber"
+type: software
+authors:
+  - family-names: Trousdell
+    given-names: Michael
+    affiliation: Rotunda Trust Limited
+version: 1.0.0
+date-released: 2026-11-15
+repository-code: "https://github.com/mjbt/timber-monitoring"
+url: "https://www.rotundatrust.org.uk/rotunda-monitoring.html"
+license: MIT
+keywords:
+  - conservation heating
+  - relative humidity
+  - historic timber
+  - condensation
+  - mould
+  - building monitoring
+  - Woolwich Rotunda
