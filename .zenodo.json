@@ -9,7 +9,7 @@
     {"name": "Rotunda Trust Limited", "type": "RightsHolder"},
     {"name": "ThaniumNine", "type": "Other"}
   ],
-  "license": "MIT",
+  "license": "mit",
   "keywords": ["conservation heating", "relative humidity", "historic timber", "condensation", "mould", "building monitoring", "Woolwich Rotunda"],
   "related_identifiers": [
     {"identifier": "https://www.rotundatrust.org.uk/rotunda-monitoring.html", "relation": "isSupplementTo", "scheme": "url"}
