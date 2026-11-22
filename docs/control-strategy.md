@@ -6,7 +6,7 @@ This sets the control intent for temporary conservation heating at the Rotunda, 
 
 ## What is controlled, and what is not
 
-The controlled variable is internal relative humidity, held below 75 per cent and released at 70. Nothing else drives the plant.
+The controlled variable is internal relative humidity, which calls heat in three stages from 73 per cent, as set out below. Nothing else drives the plant.
 
 Condensation risk is reported and not controlled. In cold clear weather the sarking under the lead will condense. It has done so since the 1860s, it cannot be heated away, and attempting it raises the internal vapour pressure driving moisture at that surface. The dew point margin is therefore a reported figure and an alarm, not an input to the heating call.
 
