@@ -6,7 +6,8 @@ import csv
 from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
-from statistics import mean
+from statistics import mean, median
+import math
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -19,6 +20,37 @@ INTERIOR = ROOF + ("MTS-77",)     # MTS-80 is in the annexe, not the drum
 
 def ts(s):
     return datetime.fromisoformat(s.replace("Z", "+00:00"))
+
+
+def ah(t, rh):
+    """Absolute humidity, g/m3 (Magnus-Sonntag, as psychro.py)."""
+    return 216.7 * 6.112 * math.exp(17.62 * t / (243.12 + t)) * rh / 100 / (273.15 + t)
+
+
+def dew(t, rh):
+    g = math.log(rh / 100) + 17.62 * t / (243.12 + t)
+    return 243.12 * g / (17.62 - g)
+
+
+def load_full():
+    """Rows in service with air temperature, RH and probe temperature."""
+    start = {d: ts(t) for d, t in SERVICE_FROM.items()}
+    out = []
+    with open(ROOT / "data" / "raw.csv") as f:
+        for r in csv.DictReader(f):
+            try:
+                t = ts(r["Time"])
+                ta, rh = float(r["AirTempC"]), float(r["RH"])
+            except (ValueError, KeyError):
+                continue
+            try:
+                tp = float(r["ProbeTempC"])
+            except (ValueError, KeyError):
+                tp = None
+            d = r["Device"]
+            if d in start and t >= start[d] and 0 < rh <= 100:
+                out.append((t, d, ta, rh, tp))
+    return out
 
 
 def load():
@@ -56,6 +88,46 @@ def main():
     dm = {d: mean(mean(v) for v in days[d].values()) for d in ("MTS-81", "MTS-77")}
     print(f"Daily mean RH since 22 Sep 2026: king post {dm['MTS-81']:.0f}%,"
           f" floor slab {dm['MTS-77']:.0f}%")
+
+    full = load_full()
+    end = datetime(2026, 11, 15, tzinfo=timezone.utc)
+
+    # Hours when the drum is damp, and whether opening would dry it.
+    # Each node is averaged within the hour; the drum is the median of the nodes.
+    per = defaultdict(lambda: defaultdict(list))
+    for t, d, ta, rh, tp in full:
+        if d in INTERIOR and t < end:
+            per[t.replace(minute=0, second=0, microsecond=0)][d].append((ta, rh))
+    inside = {}
+    for h, nodes in per.items():
+        ta = median(mean(x[0] for x in v) for v in nodes.values())
+        rh = median(mean(x[1] for x in v) for v in nodes.values())
+        a = median(mean(ah(*x) for x in v) for v in nodes.values())
+        inside[h] = (ta, rh, a)
+    wx = defaultdict(list)
+    with open(ROOT / "data" / "weather.csv") as f:
+        for r in csv.DictReader(f):
+            try:
+                t, ta, rh = ts(r["Time"]), float(r["AirTempC"]), float(r["RH"])
+            except ValueError:
+                continue
+            wx[t.replace(minute=0, second=0, microsecond=0)].append((ta, rh))
+    outside = {h: (mean(x[0] for x in v), mean(x[1] for x in v)) for h, v in wx.items()}
+    damp = [h for h, v in inside.items() if v[1] > 70 and h in outside]
+    drying = sum(ah(*outside[h]) <= inside[h][2] - 0.5 for h in damp)
+    print(f"Hours with drum above 70% RH, 10 Aug to 14 Nov 2026: {len(damp)};"
+          f" outside air drier by 0.5 g/m3 or more in {100 * drying / len(damp):.0f}% of them")
+
+    # Condensation at the sarking: days in October when any roof probe reached dew point
+    margin = defaultdict(lambda: math.inf)
+    for t, d, ta, rh, tp in full:
+        if d in ROOF and t.month == 10 and tp is not None:
+            margin[t.date()] = min(margin[t.date()], tp - dew(ta, rh))
+    wet = sum(m <= 0 for m in margin.values())
+    print(f"October 2026 days with a sarking probe at or below dew point: {wet} of {len(margin)}")
+
+    nov = [rh for t, d, rh in rows if t.month == 11 and t < end and d in INTERIOR]
+    print(f"Interior mean RH, 1 to 14 Nov 2026: {mean(nov):.0f}%")
 
 
 if __name__ == "__main__":

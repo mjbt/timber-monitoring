@@ -1211,14 +1211,15 @@ function setCaptions(view){
         'germinate. '
       : 'Daily mean humidity inside, with the day\u2019s range shaded, against the air outside. '+
         'Past thirty days the 30-day average required by EN 15757 is drawn. '))+
-      'From 10 August to 3 November the readings ran from 31 to 95 per cent across the array, and from '+
-      '31 to 89 per cent within the drum, which averaged 50 per cent in August, 62 in September and 70 in '+
-      'October, when 7 per cent of readings were above 80.',
+      'From 10 August to 14 November the readings ran from 31 to 95 per cent across the array, and from '+
+      '31 to 89 per cent within the drum, which averaged 50 per cent in August, 62 in September, 70 in '+
+      'October, when 7 per cent of readings were above 80, and 76 in the first half of November.',
     capAH: 'The water content of the air, in grams per cubic metre, averaged across the sensors '+
       'within the drum. Humidity percentages depend on temperature; this does not. The inside '+
       'line rises and falls each day with the building\u2019s own temperature: as the drum warms, '+
       'brick and timber release moisture, and as it cools they take it back. Tens of kilograms of '+
-      'water a day, far more than the openings could carry.'+
+      'water a day, far more than the openings could carry. From August to mid-November, in the hours '+
+      'when the drum was above 70 per cent, the air outside was drier for about a third of them.'+
       (view==='outlook'
         ? ' Green marks the times when the air outside holds more water than the air inside, '+
           'russet the times when it holds less.'
@@ -1231,8 +1232,7 @@ function setCaptions(view){
         'neither is a fixed sensor.')+
       ' While the line stays clear of zero, nothing measured is wet. The margin has narrowed '+
       'through the season. Heating needed to protect the primary timbers does not improve the '+
-      'sarking board risk. That can only be improved by upgrading the roof itself, with some '+
-      'limited insulation.',
+      'sarking board risk. That can only be improved by repairing the roof itself.',
     capS: 'Measured illuminance at the weather station, scaled against a clear-sky calculation '+
       'for this latitude and date, so the line reads about one on a cloudless day and falls with '+
       'cloud.'+

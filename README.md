@@ -4,7 +4,7 @@
 
 Monitoring, projection and humidity-led conservation heating for historic timber, developed at the Rotunda, Woolwich.
 
-The Rotunda was designed by John Nash as a tent for the Prince Regent's fête of 1814 and moved to Woolwich Common in 1818–1820, where it was enclosed in a brick drum. It is listed Grade II*. Its conoid roof rests on twenty-four laminated timber trusses, and the purpose of the monitoring is to keep those trusses dry enough to last. Rotunda Trust is a charitable Building Preservation Trust formed to conserve it.
+The Rotunda was designed by John Nash as a temporary room for the Prince Regent's fête of 1814 and moved to Woolwich in 1818–1820, where it was enclosed in a brick drum. It is listed Grade II*. Its conoid roof rests on twenty-four laminated timber trusses, and the purpose of the monitoring is to keep those trusses dry enough to last. Rotunda Trust is a charitable Building Preservation Trust formed to conserve it.
 
 This repository holds the science behind the live record at https://www.rotundatrust.org.uk/rotunda-monitoring.html: the formulas, the mould and condensation measures, the model that projects the interior two days ahead, the control strategy for conservation heating, and the data.
 
@@ -41,7 +41,9 @@ The Python follows the page script exactly; the tests check it against tabulated
 
 ## Findings in brief
 
-Interior humidity averaged 54 per cent from installation to 12 September 2026, falling to 31 per cent in the upper roof, then rose into the autumn, with 7 per cent of October readings above 80 per cent. The roof follows the weather within hours; the floor slab and brick drum move slowly and late, and the trusses span between the two. Interior relative humidity follows first the moisture content of the outside air, then outside temperature through the building's slow response. Condensation at the sarking under the lead in cold clear weather is reported, not controlled: it cannot be heated away. Conservation heating runs on humidity.
+From 10 August to 14 November 2026 the air within the drum ran from 31 to 89 per cent relative humidity. It averaged 50 per cent in August, 62 in September, 70 in October and 76 in the first half of November, with 7 per cent of October readings above 80. The roof follows the weather within hours; the floor slab and brick drum move slowly and late, and the trusses span between the two. Interior relative humidity follows first the moisture content of the outside air, then outside temperature through the building's slow response.
+
+In the hours when the drum was above 70 per cent, the outside air held at least 0.5 g/m³ less water than the inside for about a third of them: opening would have dried the building then, and only heat could do so otherwise. On 9 of October's 31 days the sarking under the lead reached the dew point of the air beside it. That condensation is reported, not controlled: it cannot be heated away. Conservation heating runs on humidity, and in a cold, damp spell the three stages saturate, which is evidence for repairing the roof, windows and floor.
 
 ## Licence
 
