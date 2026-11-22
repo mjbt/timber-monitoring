@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "timber-monitoring"
-version = "1.0.0"
+version = "1.1.0"
 description = "Moist-air relations, response model and humidity-led conservation heating for historic timber, from the Rotunda, Woolwich"
 readme = "README.md"
 requires-python = ">=3.9"

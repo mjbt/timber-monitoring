@@ -6,7 +6,7 @@ authors:
   - family-names: Trousdell
     given-names: Michael
     affiliation: Rotunda Trust Limited
-version: 1.0.0
+version: 1.1.0
 doi: 10.5281/zenodo.24247030
 identifiers:
   - type: doi
@@ -15,7 +15,7 @@ identifiers:
   - type: doi
     value: 10.5281/zenodo.24247031
     description: Version 1.0.0
-date-released: 2026-11-15
+date-released: 2026-11-22
 repository-code: "https://github.com/mjbt/timber-monitoring"
 url: "https://www.rotundatrust.org.uk/rotunda-monitoring.html"
 license: MIT
