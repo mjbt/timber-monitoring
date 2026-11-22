@@ -1232,7 +1232,8 @@ function setCaptions(view){
         'neither is a fixed sensor.')+
       ' While the line stays clear of zero, nothing measured is wet. The margin has narrowed '+
       'through the season. Heating needed to protect the primary timbers does not improve the '+
-      'sarking board risk. That can only be improved by repairing the roof itself.',
+      'sarking board risk. That can only be improved by repairing the roof itself. Condensation is '+
+      'most frequent at the south and south-west of the ring and on calm nights.',
     capS: 'Measured illuminance at the weather station, scaled against a clear-sky calculation '+
       'for this latitude and date, so the line reads about one on a cloudless day and falls with '+
       'cloud.'+
@@ -1247,7 +1248,9 @@ function setCaptions(view){
       '2.5 km north on open ground, taken as the free-stream wind. The fainter line is the mast '+
       'beside the building, which stands in the lee of the drum and the trees. The gap between '+
       'them is the building\u2019s wind shadow. Arrows along the top fly with the wind, so an arrow '+
-      'pointing right is air moving west to east.'+
+      'pointing right is air moving west to east. Wind changes how quickly the interior follows the '+
+      'outside air, not the level it settles at: with every opening fixed, the interior takes about '+
+      '39 hours to follow a change in calm weather and 13 in a strong wind.'+
       (view==='outlook'
         ? ' The dotted line ahead is the forecast, read against the airport, not the mast.'
         : (view==='record' ? ' Daily means. The ratio between the lines holds at roughly one part '+
@@ -1259,7 +1262,8 @@ function setCaptions(view){
         'resolves coarsely. ')+
       'Readings during the station move on 10 August 2026 are excluded. Measured at the weather '+
       'station beside the old cannon dock. Rain events show up inside as surface temperature, and '+
-      'later as moisture the fabric gives back.'
+      'later as moisture the fabric gives back. After rain the outside air dries while the air inside '+
+      'gains moisture and the floor reading rises: water is coming through the roof onto the floor.'
   };
   Object.keys(C).forEach(function(id){
     var el=document.getElementById(id);

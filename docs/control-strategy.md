@@ -66,6 +66,10 @@ Capacity. On assumed geometry the building loses about 5.7 kW/K at 0.5 air chang
 
 Energy. Three stages running from 1 November to 31 March would take about 76,000 kWh. A practical winter budget supports a fraction of full output, which is why ventilation is tested first and why the third stage should not be spent on mild humid days.
 
+Coupling. With the openings fixed as now, the interior follows the outside vapour concentration with a time constant of about 39 hours in calm weather and 13 in a strong wind, because the fabric buffers it. Opening dries the building only as fast as openings that can actually be adjusted exchange air, so venting is a matter of days of favourable weather, not hours. The air change rate should be measured once openings can be adjusted.
+
+Stored heat. The drum has run about 3 K above outside air on autumn nights and the slab about 5 K, from summer and ground heat. That margin is running down, so the calls on heat will rise through midwinter faster than outside conditions alone suggest.
+
 Air against surface. At 79 per cent in the air, a truss surface three degrees colder sits near 95 per cent. The thresholds above are what the plant can chase, not what the timber experiences.
 
 Probe positions. Where a probe reads at or above air temperature it contributes nothing to the surface statistic. Until the mounting record is complete the surface figures rest on an assumption.

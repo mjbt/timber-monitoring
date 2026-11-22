@@ -21,6 +21,7 @@ This repository holds the science behind the live record at https://www.rotundat
 | `paper/` | Technical note, What Historic Timber Needs: Live Monitoring and Forecast at the Rotunda |
 | `data/` | Sensor, weather station and airport records, 1 August to 14 November 2026, with a data description |
 | `examples/headline_figures.py` | Reproduces the figures quoted from the record |
+| `examples/further_findings.py` | Reproduces the further findings: heat and moisture balance, fabric cycle, wind coupling, condensation by position, rain, site against airport (needs `pip install -e .[analysis]`) |
 | `tests/` | Reference values and behaviour of the control logic |
 
 ## Use
@@ -29,6 +30,8 @@ This repository holds the science behind the live record at https://www.rotundat
 pip install -e .
 python -m pytest
 python examples/headline_figures.py
+pip install -e .[analysis]
+python examples/further_findings.py
 ```
 
 ```python
@@ -44,6 +47,8 @@ The Python follows the page script exactly; the tests check it against tabulated
 From 10 August to 14 November 2026 the air within the drum ran from 31 to 89 per cent relative humidity. It averaged 50 per cent in August, 62 in September, 70 in October and 76 in the first half of November, with 7 per cent of October readings above 80. The roof follows the weather within hours; the floor slab and brick drum move slowly and late, and the trusses span between the two. Interior relative humidity follows first the moisture content of the outside air, then outside temperature through the building's slow response.
 
 In the hours when the drum was above 70 per cent, the outside air held at least 0.5 g/m³ less water than the inside for about a third of them: opening would have dried the building then, and only heat could do so otherwise. On 9 of October's 31 days the sarking under the lead reached the dew point of the air beside it. That condensation is reported, not controlled: it cannot be heated away. Conservation heating runs on humidity, and in a cold, damp spell the three stages saturate, which is evidence for repairing the roof, windows and floor.
+
+The building has been warmer than the outside air every month, by about 3 K on October and November nights, and the floor slab by about 5 K: stored summer and ground heat that is now running down, so interior humidity will rise further through midwinter. The interior is also a source of moisture. Its air has held more water than the outside air on average in every month, and in 66 per cent of hours in November. After rain the outside air dries while the inside air gains moisture and the floor reading rises, consistent with water coming through the roof onto the floor. The fabric takes up and releases tens of kilograms of water a day, about 40 in August and 10 in November, peaking at 14:00. Wind changes how quickly the interior follows the outside air, with a time constant of about 39 hours in calm weather and 13 in a strong wind, not the level it settles at. Condensation at the sarking is most frequent at the south and south-west of the ring, on truss 21 among them, and on calm nights: 24 per cent of nights with wind under 2 m/s against 7 per cent otherwise. The site runs about 1 K colder than London City Airport at night, with dew points agreeing within 0.5 K.
 
 ## Licence
 
