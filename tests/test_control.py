@@ -43,7 +43,7 @@ def test_dwell_and_data_loss():
     # inside dwell, a further rise is held
     assert c.step(15, 77, 12, 8) == "Low"
     assert c.step(30, 77, 12, 8) == "Medium"
-    assert c.kw == 14 and len(c.heaters_on()) == 2
+    assert c.kw == 12 and len(c.heaters_on()) == 4
     # data lost: hold for an hour, then off
     assert c.step(45, None, 12, 8) == "Medium"
     assert c.step(105, None, 12, 8) == "Off"
@@ -63,3 +63,9 @@ def test_vent_first():
 def test_bands():
     assert condition_band(81).startswith("at or above 80")
     assert condition_band(65) == "below 70 per cent"
+
+
+def test_seven_heaters_full_output():
+    c = HeatingController()
+    c.step(0, 80, 12, 8)
+    assert c.kw == 21 and len(c.heaters_on()) == 7
