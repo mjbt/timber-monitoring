@@ -12,11 +12,15 @@ from statistics import median
 
 from .psychro import absolute_humidity
 
-# Stages: (name, kW, rising threshold, falling threshold), per cent RH.
+# Plant: seven electric heaters of 3 kW, 21 kW in total.
+HEATERS = 7
+HEATER_KW = 3
+# Stages: (name, heaters, rising threshold, falling threshold), per cent RH.
+# SP-06 to SP-08 in docs/control-strategy.md.
 STAGES = (
-    ("Low", 7, 73.0, 67.0),
-    ("Medium", 14, 76.0, 70.0),
-    ("High", 21, 79.0, 73.0),
+    ("Low", 2, 73.0, 67.0),
+    ("Medium", 4, 76.0, 70.0),
+    ("High", 7, 79.0, 73.0),
 )
 STAGE_NAMES = ("Off",) + tuple(s[0] for s in STAGES)
 
@@ -112,18 +116,18 @@ class HeatingController:
 
     def _set(self, stage, now_min):
         if stage > self.stage:
-            self.rotation = (self.rotation + 1) % len(STAGES)
+            self.rotation = (self.rotation + 1) % HEATERS
         self.stage = stage
         self.since_min = now_min
 
     @property
     def kw(self):
-        return 0 if self.stage == 0 else STAGES[self.stage - 1][1]
+        return len(self.heaters_on()) * HEATER_KW
 
     def heaters_on(self):
-        """Which of the three heaters run, rotated so wear is shared."""
-        n = self.stage
-        return sorted((self.rotation + i) % len(STAGES) for i in range(n))
+        """Which of the seven heaters run, rotated so wear is shared."""
+        n = 0 if self.stage == 0 else STAGES[self.stage - 1][1]
+        return sorted((self.rotation + i) % HEATERS for i in range(n))
 
 
 def condition_band(rh):
