@@ -69,3 +69,18 @@ def test_seven_heaters_full_output():
     c = HeatingController()
     c.step(0, 80, 12, 8)
     assert c.kw == 21 and len(c.heaters_on()) == 7
+
+
+def test_forecast_brings_stage_one_early_and_no_higher():
+    c = HeatingController()
+    # reading below 73 but above the gate; projection reaches 80
+    assert c.step(0, 71, 12, 8, forecast_rh_max=80) == "Low"
+    c = HeatingController()
+    # below the gate: the forecast alone does not call heat
+    assert c.step(0, 69, 12, 8, forecast_rh_max=80) == "Off"
+    c = HeatingController()
+    # no forecast: act on the reading
+    assert c.step(0, 71, 12, 8, forecast_rh_max=None) == "Off"
+    c = HeatingController()
+    # ventilation still comes first
+    assert c.step(0, 71, 12, 4, vent_available=True, vent_would_dry=True, forecast_rh_max=80) == "Off"

@@ -12,7 +12,7 @@ Each value is written once, in the setpoint schedule, and a sequence cites it by
 
 ## What is controlled, and what is not
 
-The controlled variable is internal relative humidity. It calls heat in three stages (SEQ-03). Nothing else drives the plant.
+The controlled variable is internal relative humidity. It calls heat in three stages (SEQ-03). The two-day projection of the interior can bring the first stage on early (SEQ-08). Nothing else drives the plant.
 
 Condensation risk is reported and not controlled (SEQ-06). In cold clear weather the sarking under the lead condenses. It has done so since the 1860s, it cannot be heated away, and heat raises the internal vapour pressure that drives moisture to that surface.
 
@@ -40,6 +40,9 @@ Seven electric heaters of 3 kW, 21 kW in total, called in three stages.
 | SP-12 | 1 | K/h | Maximum rate of setpoint movement |
 | SP-13 | 60 | minutes | Hold at the current stage on loss of humidity data |
 | SP-14 | 70, 75, 80 | % RH | Reporting bands on the monitoring page |
+| SP-15 | 24 | hours | Look-ahead of the interior projection used for early heat |
+| SP-16 | 70 | % RH | Early heat only if the reading is already above this |
+| SP-17 | +5 | % RH points | Correction to forecast outside humidity, which runs dry (verified 30 July to 9 August 2026: bias −5.0 points) |
 
 ## Sequences
 
@@ -106,6 +109,19 @@ Ventilation dries at no cost. Heat does not. The energy budget is the binding li
 2. If the quorum is not recovered in SP-13, set the plant to Off.
 3. Raise an alarm at the start of the hold and again at Off.
 
+### SEQ-08 Act on the forecast
+
+1. Project the interior relative humidity for the next SP-15, from the outside forecast corrected by SP-17.
+2. If no stage is called, the projection reaches the on value in SP-06, and the reading is above SP-16, call stage 1.
+3. Do not call stage 2 or stage 3 on the forecast.
+4. Release the early stage 1 at the off value in SP-06, as in SEQ-03.
+5. SEQ-04 applies: if ventilation is available and would dry the building, do not call heat.
+6. If no forecast is available, act on the reading only and show that the forecast is missing.
+
+A rise in humidity follows a change in the outside air by hours, and the fabric follows later. Heat brought on early, at stage 1, holds the drum with less swing and less energy than three stages called late after it has wetted.
+
+Critical condition: a damp airmass arriving after a dry spell.
+
 ## Criteria
 
 Criteria are defined at named sensors, not across the interior. The drum is stratified and its surfaces move at different speeds, so an average hides the surface where decay begins.
@@ -127,6 +143,7 @@ The second tier is not a pass or fail on the plant. Weather and use move the res
 | The building is opened on a cold winter day | Cold air comes in | The outside air holds less water than the inside, so opening dries the building |
 | Heat stays off in a humid spell | Relative humidity is high and nothing heats | Opening would dry the building, and heat is called only when it would not |
 | The page bands (SP-14) are not the switching points | The page shows 75 per cent and no heat runs | The bands describe the building; the switching points are operational detail |
+| Stage 1 runs while the reading is below 73 per cent | Heat with no call from the reading | The projection shows the drum will reach 73 per cent within SP-15; early, gentle heat uses less energy than a late, hard call (SEQ-08) |
 | Stage 3 is not held on a mild, humid day | Relative humidity is above its on value | The winter energy budget is better spent in cold, damp spells |
 
 ## Known limits
@@ -136,6 +153,7 @@ The second tier is not a pass or fail on the plant. Weather and use move the res
 | Capacity. On assumed geometry the building loses about 5.7 kW/K at 0.5 air changes an hour and 7.5 kW/K at one. Twenty-one kilowatts lifts the interior by at most about 3.7 K at half an air change, and about 2.8 K at one | In a cold, damp spell all three stages run and relative humidity stays near or above 79 per cent. The plant saturates in the conditions it exists for. That is evidence for repairing the roof, windows and floor, not for more heaters |
 | Energy. All three stages from 1 November to 31 March would use about 76,000 kWh | A practical winter budget supports a fraction of full output. This is why ventilation is tested first |
 | Coupling. With the openings fixed, the interior follows the outside vapour concentration with a time constant of about 39 hours in calm weather and 13 in a strong wind | Ventilation dries the building over days of favourable weather, not hours. The air change rate shall be measured when the openings can be adjusted |
+| Forecast. The outside forecast runs about 5 points dry, and archived forecasts were not kept after August 2026 | SEQ-08 depends on SP-17, checked over ten days only. Forecasts shall be archived as issued so that SP-17 can be checked by season. The projection on the monitoring page does not yet apply SP-17 |
 | Sarking. On clear nights the lead radiates to the sky and the sarking falls below the dew point | Condensation at the sarking cannot be prevented by the plant. It is reported (SEQ-06) |
 
 ## Reporting
