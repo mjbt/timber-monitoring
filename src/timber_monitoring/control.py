@@ -32,6 +32,9 @@ MIN_DWELL_MIN = 30        # minutes per stage, for contactor life
 STALE_MIN = 25            # a reading older than this is discarded
 MIN_LIVE_NODES = 5        # of eight
 DATA_LOSS_HOLD_MIN = 60   # hold the current stage this long on loss of data
+FORECAST_HORIZON_H = 24   # SP-15: look-ahead of the interior projection
+FORECAST_GATE_RH = 70.0   # SP-16: early heat only if the reading is already above this
+FORECAST_RH_CORRECTION = 5.0  # SP-17: points added to forecast outside RH, which runs dry
 
 
 def controlled_value(latest, now_min, stale_min=STALE_MIN, min_live=MIN_LIVE_NODES):
@@ -83,12 +86,17 @@ class HeatingController:
     rotation: int = 0
     alarms: list = field(default_factory=list)
 
-    def step(self, now_min, rh, in_t, out_t, vent_available=False, vent_would_dry=False):
+    def step(self, now_min, rh, in_t, out_t, vent_available=False, vent_would_dry=False,
+             forecast_rh_max=None):
         """Advance one decision (every fifteen minutes). Returns the stage name.
 
         rh: controlled value from controlled_value(), or None if below quorum.
+        forecast_rh_max: highest interior RH in the projection over the next
+        FORECAST_HORIZON_H hours, built on forecast outside RH corrected by
+        FORECAST_RH_CORRECTION; None if no forecast is available.
         Ventilation is tested first: heat is not called while venting is
-        available and would dry the building.
+        available and would dry the building. The forecast can bring stage 1
+        on early (SEQ-08); it never calls a higher stage.
         """
         self.alarms = []
         if rh is None:
@@ -103,6 +111,9 @@ class HeatingController:
         self.lost_since_min = None
 
         want = target_stage(rh, self.stage)
+        if (want == 0 and forecast_rh_max is not None
+                and forecast_rh_max >= STAGES[0][2] and rh > FORECAST_GATE_RH):
+            want = 1
         if vent_available and vent_would_dry:
             want = 0
         if in_t >= MAX_INTERNAL_T or in_t - out_t >= MAX_LIFT_K:
