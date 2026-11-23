@@ -130,7 +130,7 @@ Criteria are in two tiers.
 
 | Tier | What | How judged |
 |---|---|---|
-| Held to | The controller runs SEQ-01 to SEQ-07 at the scheduled values, logs every decision and raises every alarm | Pass or fail, from the decision log |
+| Held to | The controller runs SEQ-01 to SEQ-08 at the scheduled values, logs every decision and raises every alarm | Pass or fail, from the decision log |
 | Aimed at | The share of hours within the target band at each named sensor, with an allowance outside it | Against an allowance agreed in advance with the people writing the conservation management plan |
 
 The second tier is not a pass or fail on the plant. Weather and use move the result as much as the plant does. The allowance is not yet agreed. It shall be agreed before the shadow run over the coming winter.
